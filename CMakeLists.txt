@@ -7,7 +7,6 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
-find_package(rcl REQUIRED)
 find_package(rclc REQUIRED)
 find_package(std_msgs REQUIRED)
 # uncomment the following section in order to fill in
@@ -26,7 +25,7 @@ FetchContent_MakeAvailable(CMSISDSP)
 
 
 add_executable(main src/main.c)
-ament_target_dependencies(main rcl rclc std_msgs)
+ament_target_dependencies(main rclc std_msgs)
 target_link_libraries(main CMSISDSP)
 target_include_directories(main PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
