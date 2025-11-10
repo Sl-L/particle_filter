@@ -16,7 +16,7 @@ include(FetchContent)
 FetchContent_Declare(
   CMSISDSP
   GIT_REPOSITORY https://github.com/ARM-software/CMSIS-DSP.git
-  GIT_TAG master  # or a specific release like 1.15.0
+  GIT_TAG main  # or a specific release like 1.15.0
 )
 
 FetchContent_MakeAvailable(CMSISDSP)
