@@ -16,17 +16,24 @@ find_package(std_msgs REQUIRED)
 include(FetchContent)
 
 FetchContent_Declare(
-  CMSISDSP
-  GIT_REPOSITORY https://github.com/ARM-software/CMSIS-DSP.git
-  GIT_TAG main  # or a specific release like 1.15.0
+  CMSIS
+  GIT_REPOSITORY https://github.com/ARM-software/CMSIS_5.git
+  GIT_TAG main
 )
 
-FetchContent_MakeAvailable(CMSISDSP)
+FetchContent_MakeAvailable(CMSIS)
 
+# Add CMSIS-DSP source manually (inside CMSIS_5)
+add_subdirectory(${cmsis_SOURCE_DIR}/CMSIS/DSP ${CMAKE_BINARY_DIR}/CMSISDSP)
+
+include_directories(
+  ${cmsis_SOURCE_DIR}/CMSIS/Core/Include
+  ${cmsis_SOURCE_DIR}/CMSIS/DSP/Include
+)
 
 add_executable(main src/main.c)
 ament_target_dependencies(main rclc std_msgs)
-target_link_libraries(main CMSISDSP)
+target_link_libraries(main CMSIS)
 target_include_directories(main PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
