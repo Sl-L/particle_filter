@@ -33,6 +33,8 @@ add_executable(main src/main.c)
 ament_target_dependencies(main rclc std_msgs)
 target_link_libraries(main CMSISDSP)
 target_include_directories(main PUBLIC
+  ${CMSIS_INCLUDE_DIRS}
+  ${CMAKE_CURRENT_SOURCE_DIR}/include
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
 target_compile_features(main PUBLIC c_std_17 cxx_std_17)  # Require C99 and C++17
