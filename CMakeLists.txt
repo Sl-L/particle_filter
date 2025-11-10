@@ -23,17 +23,15 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(CMSIS)
 
-# Add CMSIS-DSP source manually (inside CMSIS_6)
-add_subdirectory(${cmsis_SOURCE_DIR}/CMSIS/DSP ${CMAKE_BINARY_DIR}/CMSISDSP)
-
 include_directories(
-  ${cmsis_SOURCE_DIR}/CMSIS/Core/Include
-  ${cmsis_SOURCE_DIR}/CMSIS/DSP/Include
+  ${CMSIS_SOURCE_DIR}/include/core
+  ${CMSIS_SOURCE_DIR}/include/dsp
+  include
 )
 
 add_executable(main src/main.c)
 ament_target_dependencies(main rclc std_msgs)
-target_link_libraries(main CMSIS)
+target_link_libraries(main CMSISDSP)
 target_include_directories(main PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
