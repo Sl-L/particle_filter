@@ -17,13 +17,13 @@ include(FetchContent)
 
 FetchContent_Declare(
   CMSIS
-  GIT_REPOSITORY https://github.com/ARM-software/CMSIS_5.git
+  GIT_REPOSITORY https://github.com/ARM-software/CMSIS_6.git
   GIT_TAG main
 )
 
 FetchContent_MakeAvailable(CMSIS)
 
-# Add CMSIS-DSP source manually (inside CMSIS_5)
+# Add CMSIS-DSP source manually (inside CMSIS_6)
 add_subdirectory(${cmsis_SOURCE_DIR}/CMSIS/DSP ${CMAKE_BINARY_DIR}/CMSISDSP)
 
 include_directories(
