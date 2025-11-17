@@ -333,24 +333,24 @@ int test_particle_filter(void) {
         cumsum_estimate += time_ns() - dt_estimate;
 
         //Print results
-        printf("Step %2d: True (%.2f, %.2f), Estimated (%.2f, %.2f)",
+        printf("Step %2d: True (%.2f, %.2f), Estimated (%.2f, %.2f) \n",
                t, (double)true_pos.x, (double)true_pos.y,
-               (double)estimated_trajectory[t].x, (double)estimated_trajectory[t].y, "\n");
+               (double)estimated_trajectory[t].x, (double)estimated_trajectory[t].y);
     }
 
     uint32_t end = time_ns();
-    printf("Elapsed time: %d ms", end - start, "\n");
-    printf("Movement prediction time: %d ms", cumsum_predict, "\n");
-    printf("Weight update time: %d ms", cumsum_update, "\n");
-    printf("Particle resample time: %d ms (resamples: %d)", cumsum_resample, rs, "\n");
-    printf("Position estimation time: %d ms", cumsum_estimate, "\n");
+    printf("Elapsed time: %d ms \n", end - start);
+    printf("Movement prediction time: %d ms \n", cumsum_predict);
+    printf("Weight update time: %d ms \n", cumsum_update);
+    printf("Particle resample time: %d ms (resamples: %d)", cumsum_resample, rs);
+    printf("Position estimation time: %d ms \n", cumsum_estimate);
 
     printf("\nAverages:\n");
-    printf("  Total: %d ms", (end - start) / SIMULATION_STEPS, "\n");
-    printf("  Movement prediction: %d ms", cumsum_predict / SIMULATION_STEPS, "\n");
-    printf("  Weight update: %d ms", cumsum_update / SIMULATION_STEPS, "\n");
-    printf("  Particle resample: %d ms", cumsum_resample / SIMULATION_STEPS, "\n");
-    printf("  Position estimation: %d ms", cumsum_estimate / SIMULATION_STEPS, "\n");
+    printf("  Total: %d ms \n", (end - start) / SIMULATION_STEPS);
+    printf("  Movement prediction: %d ms \n", cumsum_predict / SIMULATION_STEPS);
+    printf("  Weight update: %d ms \n", cumsum_update / SIMULATION_STEPS);
+    printf("  Particle resample: %d ms \n", cumsum_resample / SIMULATION_STEPS);
+    printf("  Position estimation: %d ms \n", cumsum_estimate / SIMULATION_STEPS);
 
     return 0;
 }
