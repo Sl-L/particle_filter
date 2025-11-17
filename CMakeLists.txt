@@ -58,7 +58,10 @@ FetchContent_MakeAvailable(CMSISDSP)
 # --------------------------------------------
 # 3. Build your executable
 # --------------------------------------------
-add_executable(main src/main.c)
+add_executable(main
+  src/main.c
+  include/particle_filter.c
+)
 
 ament_target_dependencies(main rclc std_msgs)
 
