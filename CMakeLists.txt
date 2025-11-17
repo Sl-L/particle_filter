@@ -19,13 +19,28 @@ FetchContent_Declare(
   GIT_REPOSITORY https://github.com/ARM-software/CMSIS_5.git
   GIT_TAG develop
 )
-
 FetchContent_MakeAvailable(CMSIS_Core)
 
-# Path containing cmsis_compiler.h, core_cm*.h, etc.
 set(CMSIS_CORE_INCLUDE_DIR
   ${cmsis_core_SOURCE_DIR}/CMSIS/Core/Include
 )
+
+# --------------------------------------------
+# 2. Fetch CMSIS-DSP and provide CMSIS-Core path
+# --------------------------------------------
+FetchContent_Declare(
+  CMSISDSP
+  GIT_REPOSITORY https://github.com/ARM-software/CMSIS-DSP.git
+  GIT_TAG main
+)
+
+# Must be CACHE so CMSIS-DSP’s CMake sees it
+set(CMSIS_CORE_PATH ${CMSIS_CORE_INCLUDE_DIR} CACHE PATH "Path to CMSIS-Core")
+
+# Make headers visible to its build system
+include_directories(${CMSIS_CORE_INCLUDE_DIR})
+
+FetchContent_MakeAvailable(CMSISDSP)
 
 # --------------------------------------------
 # 2. Fetch CMSIS-DSP and tell it where CMSIS-Core is
