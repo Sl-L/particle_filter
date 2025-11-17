@@ -6,10 +6,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define LOG_INFO(...)  RCUTILS_LOG_INFO(__VA_ARGS__)
+#define LOG_INF(...)  RCUTILS_LOG_INFO(__VA_ARGS__)
 #define LOG_WARN(...)  RCUTILS_LOG_WARN(__VA_ARGS__)
-#define LOG_ERROR(...) RCUTILS_LOG_ERROR(__VA_ARGS__)
-#define LOG_DEBUG(...) RCUTILS_LOG_DEBUG(__VA_ARGS__)
+#define LOG_ERR(...) RCUTILS_LOG_ERROR(__VA_ARGS__)
+#define LOG_DBG(...) RCUTILS_LOG_DEBUG(__VA_ARGS__)
 
 // Helper function for checking time, drop in replacement of k_uptime_get_32 basically
 static inline uint64_t time_ns() {

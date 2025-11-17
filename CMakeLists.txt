@@ -71,7 +71,10 @@ target_include_directories(main PUBLIC
   ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
-target_link_libraries(main CMSISDSP)
+target_link_libraries(main
+  CMSISDSP
+  m
+)
 
 target_compile_features(main PUBLIC c_std_17 cxx_std_17)
 
