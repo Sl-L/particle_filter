@@ -1,15 +1,9 @@
 #include "particle_filter.h"
 
-#include <rcutils/logging.h>
 #include "arm_math.h"
 #include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
-
-#define LOG_INF(...)  RCUTILS_LOG_INFO(__VA_ARGS__)
-#define LOG_WARN(...)  RCUTILS_LOG_WARN(__VA_ARGS__)
-#define LOG_ERR(...) RCUTILS_LOG_ERROR(__VA_ARGS__)
-#define LOG_DBG(...) RCUTILS_LOG_DEBUG(__VA_ARGS__)
 
 // Helper function for checking time, drop in replacement of k_uptime_get_32 basically
 static inline uint64_t time_ns() {
@@ -276,11 +270,11 @@ int test_particle_filter(void) {
     const Point v = {0.2f, 0.1f};
     const Area map = {{0.0f, 0.0f}, {10.0f, 10.0f}};
 
-    LOG_DBG("Initializing particles\n");
+    printf("Initializing particles\n");
     // Initialize particles
     initialize_particle_filter(&map, particle_x, particle_y, particle_w);
     
-    LOG_DBG("Particles ready, starting simulation\n");
+    printf("Particles ready, starting simulation\n");
 
     // Simulation variables
     Point true_pos = {0.0f, 0.0f};
@@ -339,24 +333,24 @@ int test_particle_filter(void) {
         cumsum_estimate += time_ns() - dt_estimate;
 
         //Print results
-        LOG_DBG("Step %2d: True (%.2f, %.2f), Estimated (%.2f, %.2f)",
+        printf("Step %2d: True (%.2f, %.2f), Estimated (%.2f, %.2f)",
                t, (double)true_pos.x, (double)true_pos.y,
                (double)estimated_trajectory[t].x, (double)estimated_trajectory[t].y);
     }
 
     uint32_t end = time_ns();
-    LOG_INF("Elapsed time: %d ms", end - start);
-    LOG_DBG("Movement prediction time: %d ms", cumsum_predict);
-    LOG_DBG("Weight update time: %d ms", cumsum_update);
-    LOG_DBG("Particle resample time: %d ms (resamples: %d)", cumsum_resample, rs);
-    LOG_DBG("Position estimation time: %d ms", cumsum_estimate);
+    printf("Elapsed time: %d ms", end - start);
+    printf("Movement prediction time: %d ms", cumsum_predict);
+    printf("Weight update time: %d ms", cumsum_update);
+    printf("Particle resample time: %d ms (resamples: %d)", cumsum_resample, rs);
+    printf("Position estimation time: %d ms", cumsum_estimate);
 
-    LOG_INF("\nAverages:");
-    LOG_INF("  Total: %d ms", (end - start) / SIMULATION_STEPS);
-    LOG_DBG("  Movement prediction: %d ms", cumsum_predict / SIMULATION_STEPS);
-    LOG_DBG("  Weight update: %d ms", cumsum_update / SIMULATION_STEPS);
-    LOG_DBG("  Particle resample: %d ms", cumsum_resample / SIMULATION_STEPS);
-    LOG_DBG("  Position estimation: %d ms", cumsum_estimate / SIMULATION_STEPS);
+    printf("\nAverages:");
+    printf("  Total: %d ms", (end - start) / SIMULATION_STEPS);
+    printf("  Movement prediction: %d ms", cumsum_predict / SIMULATION_STEPS);
+    printf("  Weight update: %d ms", cumsum_update / SIMULATION_STEPS);
+    printf("  Particle resample: %d ms", cumsum_resample / SIMULATION_STEPS);
+    printf("  Position estimation: %d ms", cumsum_estimate / SIMULATION_STEPS);
 
     return 0;
 }

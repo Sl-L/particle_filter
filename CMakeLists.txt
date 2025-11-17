@@ -66,7 +66,6 @@ add_executable(main
 ament_target_dependencies(main
   rclc
   std_msgs
-  rcutils
 )
 
 target_include_directories(main PUBLIC
