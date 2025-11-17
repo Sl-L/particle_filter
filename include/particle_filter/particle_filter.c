@@ -335,22 +335,22 @@ int test_particle_filter(void) {
         //Print results
         printf("Step %2d: True (%.2f, %.2f), Estimated (%.2f, %.2f)",
                t, (double)true_pos.x, (double)true_pos.y,
-               (double)estimated_trajectory[t].x, (double)estimated_trajectory[t].y);
+               (double)estimated_trajectory[t].x, (double)estimated_trajectory[t].y, "\n");
     }
 
     uint32_t end = time_ns();
-    printf("Elapsed time: %d ms", end - start);
-    printf("Movement prediction time: %d ms", cumsum_predict);
-    printf("Weight update time: %d ms", cumsum_update);
-    printf("Particle resample time: %d ms (resamples: %d)", cumsum_resample, rs);
-    printf("Position estimation time: %d ms", cumsum_estimate);
+    printf("Elapsed time: %d ms", end - start, "\n");
+    printf("Movement prediction time: %d ms", cumsum_predict, "\n");
+    printf("Weight update time: %d ms", cumsum_update, "\n");
+    printf("Particle resample time: %d ms (resamples: %d)", cumsum_resample, rs, "\n");
+    printf("Position estimation time: %d ms", cumsum_estimate, "\n");
 
-    printf("\nAverages:");
-    printf("  Total: %d ms", (end - start) / SIMULATION_STEPS);
-    printf("  Movement prediction: %d ms", cumsum_predict / SIMULATION_STEPS);
-    printf("  Weight update: %d ms", cumsum_update / SIMULATION_STEPS);
-    printf("  Particle resample: %d ms", cumsum_resample / SIMULATION_STEPS);
-    printf("  Position estimation: %d ms", cumsum_estimate / SIMULATION_STEPS);
+    printf("\nAverages:\n");
+    printf("  Total: %d ms", (end - start) / SIMULATION_STEPS, "\n");
+    printf("  Movement prediction: %d ms", cumsum_predict / SIMULATION_STEPS, "\n");
+    printf("  Weight update: %d ms", cumsum_update / SIMULATION_STEPS, "\n");
+    printf("  Particle resample: %d ms", cumsum_resample / SIMULATION_STEPS, "\n");
+    printf("  Position estimation: %d ms", cumsum_estimate / SIMULATION_STEPS, "\n");
 
     return 0;
 }
