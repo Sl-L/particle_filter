@@ -38,7 +38,7 @@ include_directories(
 
 add_executable(main src/main.c)
 ament_target_dependencies(main rclc std_msgs)
-target_link_libraries(main CMSISDSP)
+target_link_libraries(main CMSIS CMSISDSP)
 target_include_directories(main PUBLIC
   ${CMSIS_INCLUDE_DIRS}
   ${CMAKE_CURRENT_SOURCE_DIR}/include
