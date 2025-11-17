@@ -32,8 +32,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(CMSISDSP)
 
 include_directories(
-  ${CMSIS_SOURCE_DIR}/include/core
-  ${CMSIS_SOURCE_DIR}/include/dsp
+  ${CMSIS_SOURCE_DIR}/Core/Include
   include
 )
 
