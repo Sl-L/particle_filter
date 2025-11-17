@@ -2,7 +2,7 @@
 #include <rcl/error_handling.h>
 #include <stdio.h>
 #include "arm_math.h"
-#include "include/particle_filter/particle_filter.h"
+#include "particle_filter/particle_filter.h"
 
 int main(int argc, char **argv)
 {
