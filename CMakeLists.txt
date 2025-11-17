@@ -63,7 +63,11 @@ add_executable(main
   include/particle_filter/particle_filter.c
 )
 
-ament_target_dependencies(main rclc std_msgs)
+ament_target_dependencies(main
+  rclc
+  std_msgs
+  rcutils
+)
 
 target_include_directories(main PUBLIC
   ${CMSIS_CORE_INCLUDE_DIR}
@@ -73,6 +77,7 @@ target_include_directories(main PUBLIC
 
 target_link_libraries(main
   CMSISDSP
+  rcutils
   m
 )
 
