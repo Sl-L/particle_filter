@@ -6,10 +6,10 @@
 #include <stdlib.h>
 
 // Helper function for checking time, drop in replacement of k_uptime_get_32 basically
-static inline uint64_t time_ns() {
+static inline uint64_t time_ms() {
     struct timespec ts;
     clock_gettime(CLOCK_MONOTONIC_RAW, &ts);
-    return (uint64_t)ts.tv_sec * 1000000000ULL + ts.tv_nsec;
+    return (uint64_t)ts.tv_sec * 1000ULL + ts.tv_nsec / 1000000ULL;
 }
 
 
@@ -280,7 +280,7 @@ int test_particle_filter(void) {
     Point true_pos = {0.0f, 0.0f};
     Point estimated_trajectory[SIMULATION_STEPS];
 
-    uint32_t start = time_ns();
+    uint32_t start = time_ms();
 
     uint32_t cumsum_predict = 0;
     uint32_t cumsum_update = 0;
@@ -312,25 +312,25 @@ int test_particle_filter(void) {
         get_rssi_measurement(&true_pos, beacons, observed_rssi);
 
         // Particle filter steps
-        dt_predict = time_ns();
+        dt_predict = time_ms();
         predict_motion(&v, &map, TIME_STEP, particle_x, particle_y);
-        cumsum_predict += time_ns() - dt_predict;
+        cumsum_predict += time_ms() - dt_predict;
 
-        dt_update = time_ns();
+        dt_update = time_ms();
         update_weights(beacon_x, beacon_y, particle_x, particle_y, particle_w, beacon_ref_rssi, beacon_path_loss, beacon_std, observed_rssi, temp_weights);
-        cumsum_update += time_ns() - dt_update;
+        cumsum_update += time_ms() - dt_update;
 
         if (effective_sample_size(particle_w) < (NUM_PARTICLES / 2)) {
             rs += 1;
-            dt_resample = time_ns();
+            dt_resample = time_ms();
             resample_particles(particle_x, particle_y, particle_w);
-            cumsum_resample += time_ns() - dt_resample;
+            cumsum_resample += time_ms() - dt_resample;
         }
         
 
-        dt_estimate = time_ns();
+        dt_estimate = time_ms();
         estimated_trajectory[t] = estimate_position(particle_x, particle_y, particle_w);
-        cumsum_estimate += time_ns() - dt_estimate;
+        cumsum_estimate += time_ms() - dt_estimate;
 
         //Print results
         printf("Step %2d: True (%.2f, %.2f), Estimated (%.2f, %.2f) \n",
@@ -338,7 +338,7 @@ int test_particle_filter(void) {
                (double)estimated_trajectory[t].x, (double)estimated_trajectory[t].y);
     }
 
-    uint32_t end = time_ns();
+    uint32_t end = time_ms();
     printf("Elapsed time: %d ms \n", end - start);
     printf("Movement prediction time: %d ms \n", cumsum_predict);
     printf("Weight update time: %d ms \n", cumsum_update);
