@@ -60,7 +60,7 @@ FetchContent_MakeAvailable(CMSISDSP)
 # --------------------------------------------
 add_executable(main
   src/main.c
-  include/particle_filter.c
+  include/particle_filter/particle_filter.c
 )
 
 ament_target_dependencies(main rclc std_msgs)
