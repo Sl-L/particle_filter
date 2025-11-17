@@ -23,6 +23,14 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(CMSIS)
 
+FetchContent_Declare(
+  CMSISDSP
+  GIT_REPOSITORY https://github.com/ARM-software/CMSIS-DSP
+  GIT_TAG main
+)
+
+FetchContent_MakeAvailable(CMSISDSP)
+
 include_directories(
   ${CMSIS_SOURCE_DIR}/include/core
   ${CMSIS_SOURCE_DIR}/include/dsp
